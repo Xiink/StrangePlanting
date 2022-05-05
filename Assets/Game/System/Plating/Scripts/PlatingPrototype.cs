@@ -9,7 +9,9 @@ namespace Game.System.Plating.Scripts
     {
         [SerializeField] private Button buttonCreatePlant;
         [SerializeField] private Button buttonDeletePlant;
-        [SerializeField] private Sprite Plant;
+        [SerializeField] private GameObject Plant;
+
+        private GameObject created;
 
         private void Start()
         {
@@ -19,12 +21,12 @@ namespace Game.System.Plating.Scripts
 
         private void DeletePlant()
         {
-            
+            Destroy(created);
         }
 
         private void CreatePlant()
         {
-            
+            created = Instantiate(Plant, new Vector3(0, 0, 0), Quaternion.identity);
         }
     }
 }

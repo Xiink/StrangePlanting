@@ -73,6 +73,9 @@ namespace Game.System.ActorMovement.Scripts
             }
             else
             {
+
+            }
+            {
                 moveX = 0f;
                 moveY = 0f;
             }
@@ -82,7 +85,7 @@ namespace Game.System.ActorMovement.Scripts
             else
 
                 text.text = "Move";
-            
+
             // 取得移動方向
             Vector3 movement = new Vector3(moveX, moveY).normalized;
             // 乘上速度，使人物移動
