@@ -6,15 +6,24 @@ using UnityEngine.UI;
 
 namespace Game.System.ActorMovement.Scripts
 {
+    enum  MovementState
+    {
+        Idle,
+        Moving
+    }
+
     public class ActorMovementPrototype : MonoBehaviour
     {
         [SerializeField] private TMP_Text text;
         [SerializeField] private Button buttonMove;
         [SerializeField] private Rigidbody2D _rigidbody2D;
 
+        private MovementState state;
+
         private void Start()
         {
             text.text = "Idle";
+            ChangeState(MovementState.Idle);
             buttonMove.BindClick(MoveToward);
         }
 
@@ -73,18 +82,14 @@ namespace Game.System.ActorMovement.Scripts
             }
             else
             {
-
-            }
-            {
                 moveX = 0f;
                 moveY = 0f;
             }
 
             if (moveX == 0 && moveY == 0)
-                text.text = "Idle";
+                ChangeState(MovementState.Idle);
             else
-
-                text.text = "Move";
+                ChangeState(MovementState.Moving);
 
             // 取得移動方向
             Vector3 movement = new Vector3(moveX, moveY).normalized;
@@ -96,6 +101,17 @@ namespace Game.System.ActorMovement.Scripts
         {
             var transform1 = transform;
             transform1.position += transform1.right;
+        }
+
+        private void ChangeState(MovementState newState)
+        {
+            state = newState;
+            HandleStateChange();
+        }
+
+        private void HandleStateChange()
+        {
+            text.text = state.ToString();
         }
     }
 }
