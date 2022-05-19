@@ -14,17 +14,32 @@ namespace Game.System.ActorMovement.Scripts
 
     public class ActorMovementPrototype : MonoBehaviour
     {
+        #region Private Variables
+
+        private MovementState state;
         [SerializeField] private TMP_Text text;
         [SerializeField] private Button buttonMove;
         [SerializeField] private Rigidbody2D _rigidbody2D;
 
-        private MovementState state;
+        #endregion
+
+        #region Unity events
 
         private void Start()
         {
             text.text = "Idle";
             ChangeState(MovementState.Idle);
             buttonMove.BindClick(MoveToward);
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void ChangeState(MovementState newState)
+        {
+            state = newState;
+            HandleStateChange();
         }
 
         private void FixedUpdate()
@@ -97,21 +112,17 @@ namespace Game.System.ActorMovement.Scripts
             _rigidbody2D.velocity = movement * 5;
         }
 
+        private void HandleStateChange()
+        {
+            text.text = state.ToString();
+        }
+
         private void MoveToward()
         {
             var transform1 = transform;
             transform1.position += transform1.right;
         }
 
-        private void ChangeState(MovementState newState)
-        {
-            state = newState;
-            HandleStateChange();
-        }
-
-        private void HandleStateChange()
-        {
-            text.text = state.ToString();
-        }
+        #endregion
     }
 }
