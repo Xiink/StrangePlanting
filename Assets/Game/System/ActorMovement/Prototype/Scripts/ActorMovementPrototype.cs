@@ -1,5 +1,5 @@
 using System;
-using AutoBot.Utilities.Extensions;
+using rStarUtility.Util.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
