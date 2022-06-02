@@ -3,8 +3,8 @@ using rStarUtility.DDD.Event.Usecase;
 
 namespace Game.System.Field.PreProdution.Scripts.UseCase
 {
-    public interface IFieldRespository : IRepository<IFieldReadModel>
-    {
-
-    }
+    // public interface IFieldRespository : IRepository<IFieldReadModel>
+    // {
+    //
+    // }
 }

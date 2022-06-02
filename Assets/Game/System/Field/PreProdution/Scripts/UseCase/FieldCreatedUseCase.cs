@@ -7,22 +7,22 @@ using NotImplementedException = System.NotImplementedException;
 
 namespace Game.System.Field.PreProdution.Scripts.UseCase
 {
-    public class FieldCreatedUseCase : UseCase<FieldCreatedUseCase.FieldCratedInput, CqrsCommandPresenter, IFieldRespository>
-    {
-        public FieldCreatedUseCase(IDomainEventBus domainEventBus, IFieldRespository repository) : base(domainEventBus,
-            repository)
-        {
-        }
-
-        public override void Execute(FieldCratedInput input, CqrsCommandPresenter output)
-        {
-            throw new NotImplementedException();
-        }
-
-        public class FieldCratedInput : Input
-        {
-            public string filedId;
-            public string fieldDataId;
-        }
-    }
+    // public class FieldCreatedUseCase : UseCase<FieldCreatedUseCase.FieldCratedInput, CqrsCommandPresenter, IFieldRespository>
+    // {
+    //     // public FieldCreatedUseCase(IDomainEventBus domainEventBus, IFieldRespository repository) : base(domainEventBus,
+    //     //     repository)
+    //     // {
+    //     // }
+    //     //
+    //     // public override void Execute(FieldCratedInput input, CqrsCommandPresenter output)
+    //     // {
+    //     //     throw new NotImplementedException();
+    //     // }
+    //     //
+    //     // public class FieldCratedInput : Input
+    //     // {
+    //     //     public string filedId;
+    //     //     public string fieldDataId;
+    //     // }
+    // }
 }
