@@ -55,5 +55,8 @@
         "com.neuecc.unirx"
       ]
     }
+  ],
+  "testables": [
+    "com.svermeulen.extenject"
   ]
 }

@@ -1,10 +1,9 @@
-using System;
 using rStarUtility.Util.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Game.System.ActorMovement.Scripts
+namespace Game.System.ActorMovement.Prototype.Scripts
 {
     enum  MovementState
     {
