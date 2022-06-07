@@ -7,6 +7,7 @@ namespace Game.System.ActorMovement.Prototype.Scripts
     {
         [Inject(Optional = true)]
         private IInputSystem _inputManager;
+        
         [Inject(Id = "MainPlayer", Optional = true)]
         private Transform _transform;
 
@@ -86,8 +87,8 @@ namespace Game.System.ActorMovement.Prototype.Scripts
             // 乘上速度，使人物移動
             // _rigidbody2D.velocity = movement * 5;
 
-            var newPosH = Vector3.right * (h * Time.deltaTime) * 5;
-            var newPosV = Vector3.up * (v * Time.deltaTime) * 5;
+            var newPosH = Vector3.right * (h * 1) * 5;
+            var newPosV = Vector3.up * (v * 1) * 5;
             _transform.position += newPosH;
             _transform.position += newPosV;
         }

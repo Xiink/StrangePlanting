@@ -9,7 +9,8 @@ public class SampleInstaller : MonoInstaller
     public override void InstallBindings()
     {
         Container.BindInterfacesTo<ActorMovementPrototypeNew>().AsSingle();
+        Container.Bind<IInputSystem>().To<InputManager_New>().AsSingle();
         // Container.Bind<IInput>().AsSingle();
-        Container.BindInterfacesTo<InputManager_New>().AsSingle();
+        // Container.BindInterfacesTo<InputManager_New>().AsSingle();
     }
 }
