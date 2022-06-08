@@ -10,7 +10,6 @@ public class SampleInstaller : MonoInstaller
     {
         Container.BindInterfacesTo<ActorMovementPrototypeNew>().AsSingle();
         Container.Bind<IInputSystem>().To<InputManager_New>().AsSingle();
-        // Container.Bind<IInput>().AsSingle();
-        // Container.BindInterfacesTo<InputManager_New>().AsSingle();
+        Container.Bind<ITimeSystem>().To<TimeSystem>().AsSingle();
     }
 }

@@ -9,22 +9,36 @@ namespace Game.System.ActorMovement.Prototype.Tests
 {
     public class ActorMovementPrototypeTest : ZenjectUnitTestFixture
     {
+        private string transformId = "MainPlayer";
+        private ActorMovementPrototypeNew actor;
+        private ITimeSystem timesystem;
+        private IInputSystem inputSystem;
+        private Transform mainplayer;
+
+        public override void Setup()
+        {
+            base.Setup();
+            // arrange // given
+            Container.Bind<Transform>().WithId(transformId).FromNewComponentOnNewGameObject().AsSingle();
+            Container.Bind<IInputSystem>().FromSubstitute().AsSingle();
+            Container.Bind<ITimeSystem>().FromSubstitute().AsSingle();
+            Container.Bind<ActorMovementPrototypeNew>().AsSingle();
+
+            actor = Container.Resolve<ActorMovementPrototypeNew>();
+            timesystem = Container.Resolve<ITimeSystem>();
+            inputSystem = Container.Resolve<IInputSystem>();
+            mainplayer = Container.ResolveId<Transform>(transformId);
+        }
+
         // A Test behaves as an ordinary method
         [Test]
         public void ActorMovementPrototypeTestSimplePasses()
         {
-            var mainplayer = new GameObject("MainPlayer").transform;
-            // var input = NSubstitute.Substitute.For<IInputSystem>();
-            // input.GetHorizontal().Returns(1);
-            // input.GetVertical().Returns(1);
-            Container.BindInstance(mainplayer);
-            // Container.Bind<IInputSystem>().FromInstance(input).AsSingle();
-            Container.Bind<IInputSystem>().FromSubstitute().AsSingle();
-            Container.Bind<ActorMovementPrototypeNew>().AsSingle();
-            var actor = Container.Resolve<ActorMovementPrototypeNew>();
-            var inputSystem = Container.Resolve<IInputSystem>();
-            inputSystem.GetHorizontal().Returns(1);
-            inputSystem.GetVertical().Returns(1);
+            // arrange //given
+            GivenHorzontalValue(1);
+            GivenVerticalValue(1);
+            GiveDeltaTime(1);
+
             // var actor = new ActorMovementPrototypeNew(input, mainplayer);
             actor.Tick();
             var pos = mainplayer.position;
@@ -32,6 +46,21 @@ namespace Game.System.ActorMovement.Prototype.Tests
             var expectPos = new Vector3(5f, 5f);
             pos = new Vector2((float)Math.Round(pos.x, 2), (float)Math.Round(pos.x, 2));
             Assert.AreEqual(pos, expectPos, "Are equal");
+        }
+
+        private void GiveDeltaTime(int deltatime)
+        {
+            timesystem.GetDeltaTime().Returns(deltatime);
+        }
+
+        private void GivenHorzontalValue(int horizontal)
+        {
+            inputSystem.GetHorizontal().Returns(horizontal);
+        }
+
+        private void GivenVerticalValue(int vertical)
+        {
+            inputSystem.GetVertical().Returns(vertical);
         }
     }
 }

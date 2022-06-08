@@ -11,11 +11,8 @@ namespace Game.System.ActorMovement.Prototype.Scripts
         [Inject(Id = "MainPlayer", Optional = true)]
         private Transform _transform;
 
-        public ActorMovementPrototypeNew(IInputSystem inputManager, Transform transform)
-        {
-            this._inputManager = inputManager;
-            this._transform = transform;
-        }
+        [Inject]
+        private ITimeSystem _timeSystem;
 
         public void Tick()
         {
@@ -87,29 +84,11 @@ namespace Game.System.ActorMovement.Prototype.Scripts
             // 乘上速度，使人物移動
             // _rigidbody2D.velocity = movement * 5;
 
-            var newPosH = Vector3.right * (h * 1) * 5;
-            var newPosV = Vector3.up * (v * 1) * 5;
+            var deltaTime = _timeSystem.GetDeltaTime();
+            var newPosH = Vector3.right * (h * deltaTime) * 5;
+            var newPosV = Vector3.up * (v * deltaTime) * 5;
             _transform.position += newPosH;
             _transform.position += newPosV;
-        }
-    }
-
-    public interface IInputSystem
-    {
-        float GetHorizontal();
-        float GetVertical();
-    }
-
-    public class InputManager_New : IInputSystem
-    {
-        public float GetHorizontal()
-        {
-            return Input.GetAxisRaw("Horizontal");
-        }
-
-        public float GetVertical()
-        {
-            return Input.GetAxisRaw("Vertical");
         }
     }
 }
